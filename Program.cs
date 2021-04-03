@@ -77,7 +77,7 @@ namespace NPuzzle
         private static void InitMethods()
         {
             lMethods.Add(new BFSStrategy());
-            // lMethods[1] = new GreedyBestFirstStrategy();
+            lMethods.Add(new GreedyBestFirstStrategy());
         }
 
         private static NPuzzle ReadProblemFile(string fileName) // this allow only one puzzle to be specified in a problem file

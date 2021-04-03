@@ -36,7 +36,6 @@ namespace NPuzzle
 
         public Direction[] GetPossibleActions()
         {
-
             int[] blankLocation = { 0, 0 }; //dummy value to avoid errors.
 
             try
@@ -54,13 +53,17 @@ namespace NPuzzle
 
             int thisIndex = 0;
 
-            // X check
-            if (blankLocation[0] == 0)
+            // M check
+            // M is horizontal. N is veritcal.
+            int blankTileNPos = blankLocation[0];
+            int blankTileMPos = blankLocation[1];
+
+            if (blankTileNPos == 0)
             {
                 //the blank cell is already as far left as it will go, it can move right
                 result[thisIndex++] = Direction.Right;
             }
-            else if (blankLocation[0] == (Puzzle.Length - 1))
+            else if (blankTileNPos == (Puzzle.GetLength(0) - 1))
             {
                 result[thisIndex++] = Direction.Left;
             }
@@ -71,12 +74,12 @@ namespace NPuzzle
             }
 
             // Y Check
-            if (blankLocation[1] == 0)
+            if (blankTileMPos == 0)
             {
                 //the blank cell is already as far up as it will go, it can move down
                 result[thisIndex++] = Direction.Down;
             }
-            else if (blankLocation[1] == (Puzzle.Length - 1))
+            else if (blankTileMPos == (Puzzle.GetLength(1) - 1))
             {
                 result[thisIndex++] = Direction.Up;
             }
@@ -114,7 +117,7 @@ namespace NPuzzle
 
                 for (int i = 0; i <= 1; i++)
                 {
-                    if (blankLocation[i] == 0 || blankLocation[i] == (Puzzle.Length - 1))
+                    if (blankLocation[i] == 0 || blankLocation[i] == (Puzzle.GetLength(i) - 1))
                     {
                         //do nothing
                     }
@@ -187,6 +190,7 @@ namespace NPuzzle
                     result.Puzzle[blankCell[0], blankCell[1]] = result.Puzzle[blankCell[0] + 1, blankCell[1]];
                     result.Puzzle[blankCell[0] + 1, blankCell[1]] = 0;
                 }
+
                 return result;
             }
             catch (IndexOutOfRangeException)
@@ -251,6 +255,33 @@ namespace NPuzzle
                 }
             }
             return true;	//All elements matched? Return true
+        }
+
+        public override string ToString()
+        {
+            int rowsLength = Puzzle.GetLength(1);
+            int colsLenth = Puzzle.GetLength(0);
+
+            string result = "     ";
+            for (int i = 0; i < colsLenth; i++)
+            {
+                result += $"{i}  ";
+            }
+            result += Environment.NewLine;
+
+            for (int i = 0; i < rowsLength; i++)
+            {
+                result += $"{i}: [ ";
+
+                for (int j = 0; j < colsLenth; j++)
+                {
+                    result += $"{Puzzle[j, i]}";
+                    if (j != colsLenth - 1)
+                        result += ", ";
+                }
+                result += " ]" + Environment.NewLine;
+            }
+            return result;
         }
     }
 }

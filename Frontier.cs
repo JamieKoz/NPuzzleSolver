@@ -8,7 +8,7 @@ namespace NPuzzle
     {
         //We can use a linked list here because it's more efficient than an array
         //and because we only want to add/remove items from the start or end.
-        private List<PuzzleState> Items = new List<PuzzleState>();
+        private LinkedList<PuzzleState> Items = new LinkedList<PuzzleState>();
 
         public int Count => Items.Count;
 
@@ -18,8 +18,8 @@ namespace NPuzzle
         /// <returns></returns>
         public PuzzleState Pop()
         {
-            var item = Items[0];
-            Items.RemoveAt(0);
+            var item = Items.First();
+            Items.RemoveFirst();
             return item;
         }
 
@@ -29,7 +29,7 @@ namespace NPuzzle
         /// <param name="state"></param>
         public void Push(PuzzleState state)
         {
-            Items.Prepend(state);
+            Items.AddFirst(state);
         }
 
         public void Push(PuzzleState[] states)
@@ -46,7 +46,7 @@ namespace NPuzzle
         /// <param name="aState"></param>
         public void Enqueue(PuzzleState state)
         {
-            Items.Append(state);
+            Items.AddLast(state);
         }
 
         /// <summary>
@@ -85,13 +85,21 @@ namespace NPuzzle
 
         public void SortByHeuristicAsc()
         {
-            //TODO: Implement SortByHeuristicAsc()
+            var tempList = new LinkedList<PuzzleState>();
+            var sortedItems = Items.OrderBy(i => i.EvaluationFunction);
+
+            foreach (var item in sortedItems)
+            {
+                tempList.AddLast(item);
+            }
+
+            Items = tempList;
         }
 
         public void SortByHeuristicDesc()
         {
+
             //TODO: Implement SortByHeuristicDesc()
         }
     }
-
 }

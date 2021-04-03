@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 
 namespace NPuzzle
@@ -14,7 +12,7 @@ namespace NPuzzle
             Searched = new List<PuzzleState>();
         }
 
-        protected PuzzleState popFrontier()
+        protected override PuzzleState PopFrontier()
         {
             //remove an item from the fringe to be searched
             PuzzleState thisState = Frontier.Pop();
@@ -34,13 +32,12 @@ namespace NPuzzle
             //put the start state in the Fringe to get explored.
             AddToFrontier(puzzle.StartState);
 
-
             List<PuzzleState> newStates = new List<PuzzleState>();
 
             while (Frontier.Count > 0)
             {
                 //get the next item off the fringe
-                PuzzleState thisState = popFrontier();
+                PuzzleState thisState = this.PopFrontier();
 
                 //is it the goal item?
                 if (thisState.Equals(puzzle.GoalState))
@@ -52,6 +49,8 @@ namespace NPuzzle
                 {
                     //This isn't the goal, just explore the node
                     newStates = thisState.Explore();
+                    // Console.Clear();
+                    // Console.WriteLine(thisState);
 
                     for (int i = 0; i < newStates.Count; i++)
                     {
@@ -85,11 +84,6 @@ namespace NPuzzle
                 Frontier.Enqueue(state);
                 return true;
             }
-        }
-
-        protected override PuzzleState PopFrontier()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

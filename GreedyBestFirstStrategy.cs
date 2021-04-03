@@ -59,7 +59,6 @@ namespace NPuzzle
                         newChild.HeuristicValue = HeuristicValue(newStates[i], aPuzzle.GoalState);
                         newChild.EvaluationFunction = newChild.HeuristicValue;
                     }
-
                 }
 
                 //Sort the fringe by it's Heuristic Value. The PuzzleComparator uses each nodes EvaluationFunction
@@ -70,7 +69,7 @@ namespace NPuzzle
                 // the agent should try to move the empty cell UP before attempting LEFT, before
                 // attempting DOWN, before attempting RIGHT, in that order.
                 //
-                // Collections.sort(Frontier, new PuzzleComparator());
+                Frontier.SortByHeuristicAsc();
             }
 
             //no more nodes and no path found?

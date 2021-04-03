@@ -27,3 +27,23 @@ Known limitations:
   - When it tries to explore the next possible moves, and if all else is being equal, nodes are NOT expanded according to the following order:
     the agent should try to move the empty cell UP before attempting LEFT, before attempting DOWN, before attempting RIGHT, in that order.
 	Can you fix this issue?
+
+
+
+
+Expected result from N-Puzzle-test.txt in Java:
+
+./N-puzzle-test.txt   GBFS   319
+Up;Up;Right;Down;Down;Left;Up;Up;Right;Down;Left;Left;Up;Right;Down;Down;Left;Up;Right;Up;Left;Down;Right;Down;Left;Up;Up;Right;Down;Left;Down;Right;Right;Up;Left;Up;Right;Down;Down;Left;Up;Right;Up;Left;Down;Down;
+
+./N-puzzle-test.txt   BFS   52497
+Up;Left;Up;Right;Down;Right;Down;Left;Left;Up;Right;Up;Left;Down;Right;Up;Right;Down;Left;Down;
+
+
+Result from N-Puzzle-test.txt in C#:
+
+./N-puzzle-test.txt   GBFS   319
+Up;Up;Right;Down;Down;Left;Up;Up;Right;Down;Left;Left;Up;Right;Down;Down;Left;Up;Right;Up;Left;Down;Right;Down;Left;Up;Up;Right;Down;Left;Down;Right;Right;Up;Left;Up;Right;Down;Down;Left;Up;Right;Up;Left;Down;Down;
+
+./N-puzzle-test.txt   BFS   52497
+Up;Left;Up;Right;Down;Right;Down;Left;Left;Up;Right;Up;Left;Down;Right;Up;Right;Down;Left;Down;
