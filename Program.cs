@@ -78,6 +78,9 @@ namespace NPuzzle
         {
             lMethods.Add(new BFSStrategy());
             lMethods.Add(new GreedyBestFirstStrategy());
+            lMethods.Add(new DFSStrategy());
+            lMethods.Add(new AStarStrategy());
+
         }
 
         private static NPuzzle ReadProblemFile(string fileName) // this allow only one puzzle to be specified in a problem file
@@ -93,18 +96,20 @@ namespace NPuzzle
 
                 //work out the "physical" size of the puzzle
                 //here we only deal with NxN puzzles, so the puzzle size is taken to be the first number
-                int puzzleSize = int.Parse(bothDimensions[0]);
+                int puzzleSizeRow = int.Parse(bothDimensions[0]);
+                int puzzleSizeColumn = int.Parse(bothDimensions[1]);
 
-                int[,] startPuzzleGrid = new int[puzzleSize, puzzleSize];
-                int[,] goalPuzzleGrid = new int[puzzleSize, puzzleSize];
+
+                int[,] startPuzzleGrid = new int[puzzleSizeRow, puzzleSizeColumn];
+                int[,] goalPuzzleGrid = new int[puzzleSizeRow, puzzleSizeColumn];
 
                 //fill in the start state
                 string startStateString = puzzle.ReadLine();
-                startPuzzleGrid = ParseStateString(startStateString, startPuzzleGrid, puzzleSize);
+                startPuzzleGrid = ParseStateString(startStateString, startPuzzleGrid, puzzleSizeColumn);
 
                 //fill in the end state
                 string goalStateString = puzzle.ReadLine();
-                goalPuzzleGrid = ParseStateString(goalStateString, goalPuzzleGrid, puzzleSize);
+                goalPuzzleGrid = ParseStateString(goalStateString, goalPuzzleGrid, puzzleSizeColumn);
 
                 //create the nPuzzle object...
                 NPuzzle result = new NPuzzle(startPuzzleGrid, goalPuzzleGrid);

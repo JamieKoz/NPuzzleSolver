@@ -98,6 +98,15 @@ namespace NPuzzle
 
         public void SortByHeuristicDesc()
         {
+            var tempList = new LinkedList<PuzzleState>();
+            var sortedItems = Items.OrderByDescending(i => i.EvaluationFunction);
+
+            foreach (var item in sortedItems)
+            {
+                tempList.AddLast(item);
+            }
+
+            Items = tempList;
 
             //TODO: Implement SortByHeuristicDesc()
         }
